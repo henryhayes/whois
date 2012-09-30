@@ -33,6 +33,7 @@ class Whois_Lookup_Domain
      * @var string
      */
     protected $_domain;
+    protected $_tld;
 
     /**
      * Constructor sets the domain as read only.

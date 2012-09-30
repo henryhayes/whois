@@ -105,40 +105,23 @@ abstract class Whois_Lookup_Adapter_Abstract implements Whois_Lookup_Adapter_Int
     }
 
     /**
-     * Magic get method.
-     *
-     * @param  string $name
-     * @return string
-     * @throws UnexpectedValueException
+     * Performs the Whois lookup.
      */
-    public function __get($name)
+    public function doLookup()
     {
-        $method = 'get' . ucfirst($name);
-        if (method_exists($this->getContainer(), $method)) {
+        $domain = $this->getDomain()->__toString();
 
-            return call_user_func(array($this->getContainer(), $method));
+        if ($conn = fsockopen($this->getServer(), $this->getPort())) {
+
+            fputs($conn, $domain . "\r\n");
+
+            while (!feof($conn)) {
+                $output .= fgets($conn, 128);
+            }
+
+            fclose($conn);
+        } else {
+            //
         }
-
-        return $this->getContainer()->$property;
-    }
-
-    /**
-     * Call this method to find out if a value is available to use.
-     *
-     * @param string $name
-     * @return boolean
-     */
-    public function __isset($name)
-    {
-        try {
-
-            $this->__get($name);
-
-        } catch (UnexpectedValueException $e) {
-
-            return false;
-        }
-
-        return true;
     }
 }

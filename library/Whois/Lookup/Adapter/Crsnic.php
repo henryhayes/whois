@@ -31,5 +31,17 @@ require_once('Whois/Lookup/Adapter/Abstract.php');
  */
 class Whois_Lookup_Adapter_Crsnic extends Whois_Lookup_Adapter_Abstract
 {
-    //
+    /**
+     * Contains the location of the whois server.
+     *
+     * @var string
+     */
+    protected $_server = 'whois.crsnic.net';
+
+    /**
+     * Contains the port number to be used when calling the whois server.
+     *
+     * @var int
+     */
+    protected $_port = 43;
 }

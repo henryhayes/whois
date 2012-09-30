@@ -28,4 +28,33 @@
 interface Whois_Lookup_Adapter_Interface
 {
     public function __construct(Whois_Domain $domain);
+
+    /**
+     * Sets the domain object into the member variable property.
+     *
+     * @param Whois_Lookup_Domain $domain
+     */
+    public function setDomain(Whois_Lookup_Domain $domain);
+
+    /**
+     * Gets the domain object.
+     *
+     * @return Whois_Lookup_Domain
+     */
+    public function getDomain();
+
+    /**
+     * Sets the container object into the member variable property.
+     *
+     * @param Whois_Lookup_Container $container
+     */
+    public function setContainer(Whois_Lookup_Container $container);
+
+    /**
+     * Returns container object. When this is returned, this is the
+     * point when we actually need to do the whois lookup.
+     *
+     * @return Whois_Lookup_Container
+     */
+    public function getContainer();
 }

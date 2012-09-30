@@ -101,7 +101,7 @@ class Whois_Lookup
     public function __call($name, $args)
     {
         try {
-            $return = call_user_func_array(array($this->getAdapter(), $name), $args);
+            $return = call_user_func_array(array($this->getAdapter()->getContainer(), $name), $args);
 
         } catch (UnexpectedValueException $e) {
 
