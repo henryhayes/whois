@@ -25,8 +25,25 @@
  */
 class Whois_Lookup
 {
+    /**
+     * Current version of this project.
+     *
+     * @var string
+     */
+    const VERSION = '0.1';
+
+    /**
+     * Contains an instance of Whois_Lookup_Domain.
+     *
+     * @var Whois_Lookup_Domain
+     */
     protected $_domain;
 
+    /**
+     * An array of which adapter to use for which TLD.
+     *
+     * @var array
+     */
     protected $_adapters = array(
         'com'            => 'Crsnic',
     );
@@ -37,19 +54,19 @@ class Whois_Lookup
     }
 
     /**
-     * Sets the domain. If domain is type Whois_Domain sets as is,
-     * if not, creates Whois_Domain object and sets it.
+     * Sets the domain. If domain is type Whois_Lookup_Domain sets as is,
+     * if not, creates Whois_Lookup_Domain object and sets it.
      *
-     * @param Whois_Domain $domain
+     * @param Whois_Lookup_Domain $domain
      * @return Whois_Lookup
      */
     public function setDomain($domain)
     {
-        if ($domain instanceof Whois_Domain) {
+        if ($domain instanceof Whois_Lookup_Domain) {
             $this->_domain = $domain;
         }
 
-        $this->_domain = new Whois_Domain($domain);
+        $this->_domain = new Whois_Lookup_Domain($domain);
 
         return $this;
     }
@@ -57,21 +74,11 @@ class Whois_Lookup
     /**
      * Returns an stance of the domain object.
      *
-     * @return Whois_Domain
+     * @return Whois_Lookup_Domain
      */
     public function getDomain()
     {
         return $this->_domain;
-    }
-
-    /**
-     * Returns the domain object as a string.
-     *
-     * @return string
-     */
-    public function getDomainString()
-    {
-        return $this->_domain->__toString();
     }
 
     /**

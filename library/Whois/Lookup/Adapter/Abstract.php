@@ -32,24 +32,25 @@ require_once('Whois/Lookup/Adapter/Interface.php');
 abstract class Whois_Lookup_Adapter_Abstract implements Whois_Lookup_Adapter_Interface
 {
     /**
-     * Contains a Whois_Domain instance.
+     * Contains a Whois_Lookup_Domain instance.
      *
-     * @var Whois_Domain
+     * @var Whois_Lookup_Domain
      */
     protected $_domain;
 
     /**
      * Contains an Whois_Lookup_Container instance.
      *
+     * @return Whois_Lookup_Container
      */
     protected $_container;
 
     /**
      * Constructor, set's the domain name object.
      *
-     * @param Whois_Domain $domain
+     * @param Whois_Lookup_Domain $domain
      */
-    public function __construct(Whois_Domain $domain = null)
+    public function __construct(Whois_Lookup_Domain $domain = null)
     {
         $this->setDomain($domain);
     }
@@ -57,15 +58,36 @@ abstract class Whois_Lookup_Adapter_Abstract implements Whois_Lookup_Adapter_Int
     /**
      * Sets the domain object into the member variable property.
      *
-     * @param Whois_Domain $domain
+     * @param Whois_Lookup_Domain $domain
      */
-    public function setDomain(Whois_Domain $domain)
+    public function setDomain(Whois_Lookup_Domain $domain)
     {
         $this->_domain = $domain;
     }
 
     /**
-     * Returns container object.
+     * Gets the domain object.
+     *
+     * @return Whois_Lookup_Domain
+     */
+    public function getDomain()
+    {
+        return $this->_domain;
+    }
+
+    /**
+     * Sets the container object into the member variable property.
+     *
+     * @param Whois_Lookup_Container $container
+     */
+    public function setContainer(Whois_Lookup_Container $container)
+    {
+        $this->_container = $container;
+    }
+
+    /**
+     * Returns container object. When this is returned, this is the
+     * point when we actually need to do the whois lookup.
      *
      * @return Whois_Lookup_Container
      */
@@ -76,20 +98,10 @@ abstract class Whois_Lookup_Adapter_Abstract implements Whois_Lookup_Adapter_Int
              * @see Whois_Lookup_Container
              */
             require_once('Whois/Lookup/Container.php');
-            return new Whois_Lookup_Container();
+            $this->_container = Whois_Lookup_Container();
         }
 
         return $this->_container;
-    }
-
-    /**
-     * Gets the domain object.
-     *
-     * @return Whois_Domain
-     */
-    public function getDomain()
-    {
-        return $this->_domain;
     }
 
     /**

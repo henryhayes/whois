@@ -55,19 +55,37 @@ class Whois_Lookup_Container
 
     /**
      * Constructor
-     * @param array $options Optional options array.
+     * @param mixed $options Optional options array.
      */
-    public function __construct(array $options = null)
+    public function __construct($options = null)
     {
-        if (!is_null($options)) {
+        if ($options instanceof Zend_Config) {
+            $this->setConfig($options);
+        }
+
+        if (!is_array($options)) {
             $this->setOptions($options);
         }
     }
 
     /**
+     * Sets the options from a Zend_Config object.
+     *
+     * @param  Zend_Config $config
+     * @return Whois_Lookup_Container
+     */
+    public function setConfig(Zend_Config $config)
+    {
+        $this->setOptions($config->toArray());
+
+        return $this;
+    }
+
+    /**
      * Sets options array to internal array.
      *
-     * @param array $options
+     * @param  array $options
+     * @return Whois_Lookup_Container
      */
     public function setOptions(array $options)
     {

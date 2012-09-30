@@ -10,20 +10,22 @@
  * http://www.opensource.org/licenses/bsd-license.php
  *
  * @category   Whois
- * @package    Domain
+ * @package    Lookup
+ * @subpackage Domain
  * @copyright  Copyright (c) 2012 PHP Whois Project
  * @license    http://www.opensource.org/licenses/bsd-license.php
- * @since      Saturday, 29 September 2012
+ * @since      Sunday, 30 September 2012
  */
 /**
  * Whois Domain class.
  *
  * @category   Whois
- * @package    Domain
+ * @package    Lookup
+ * @subpackage Domain
  * @copyright  Copyright (c) 2012 PHP Whois Project
  * @license    http://www.opensource.org/licenses/bsd-license.php
  */
-class Whois_Domain
+class Whois_Lookup_Domain
 {
     /**
      * Contains the domain name as a string.
@@ -71,7 +73,7 @@ class Whois_Domain
 
     /**
      * Magic toString method echos the domain.
-     * {@see Whois_Domain::getDomain()}
+     * {@see Whois_Lookup_Domain::getDomain()}
      */
     public function __toString()
     {
